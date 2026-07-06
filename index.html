@@ -6,16 +6,24 @@
             body {
                 background-color: rgb(30, 30, 30);
             }
-            #chat {
-                height: 100vh;
-                width:  100vw;
+            .chat {
+                height: 92vh;
+                width:  30vw;
+                margin-right: auto; /* Pushes the entire div to the right side */
+                background-color: #454545;
+                padding: 15px;
+                overflow: hidden;
+                overflow-y: auto;
+            }
+            .chat::-webkit-scrollbar {
+                display: none;
             }
             section {
                 display: flex;         /* Puts items on the same line */
                 flex-direction: row;   /* Confirms horizontal direction (default) */
                 gap: 15px;             /* Adds clean spacing between items */
             }
-            h3 {
+            h4 {
                 margin-top: 0;
                 margin-bottom: 0;
                 padding-top: 0;
@@ -48,14 +56,14 @@
                 let chatdiv = document.getElementById("chat");
                 //while (true) {
                 let comment = document.createElement("section");
-                let temp = document.createElement("h3");
+                let temp = document.createElement("h4");
                 let randname = name();
                 console.log(`${randm()}`)
                 comment.id = i;
                 temp.style.color = `rgb(${(randm()+155)}, ${(randm()+155)}, ${(randm()+155)})`;
                 temp.innerText = `${randname}: `;
                 comment.append(temp);
-                temp = document.createElement("h3");
+                temp = document.createElement("h4");
                 temp.innerText = `${msgs[Math.floor(Math.random() * msgs.length)]}`;
                 temp.style.color = `grey`;
                 comment.append(temp);
@@ -81,6 +89,6 @@
     </head>
     <body>
         <button onclick="runchat()">start chat</button>
-        <div id="chat"></div>
+        <div id="chat" class="chat"></div>
     </body>
 </html>
