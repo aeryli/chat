@@ -137,6 +137,11 @@
                 const observerCallback = (entries, observer) => { entries.forEach( entry => { if (entry.isIntersecting) { runchat(5000); } } ); };
                 const observer = new IntersectionObserver(observerCallback, options);
                 observer.observe(sentinel);
+                const currentUrl = window.location.href;
+                const urlObject = new URL(currentUrl);
+                if (urlObject.searchParams.get('v')) {
+                    onserch(urlObject.searchParams.get('v'));
+                };
                 //runchat(500);
             };
         </script>
@@ -151,13 +156,14 @@
        <div id="main" class="main">
             <section id="ctrl">
                 <script>
+                    let vidId
                     function onserch(url) {
                         if (url.includes("?v=")) {
-                            let videoId = url.substring(url.indexOf("?v=") + "?v=".length); 
+                            vidId = url.substring(url.indexOf("?v=") + "?v=".length); 
                         } else {
-                            let videoId = url;
+                            let vidId = url;
                         };
-                        document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                        document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${vidId}&autoplay=1`;
                         document.getElementById('player-ytbe').contentWindow.location.reload();
                     };
                 </script>
@@ -165,7 +171,7 @@
                 <button onclick="onserch(document.getElementById('linky').value);">start video</button>
             </section>
             <br>
-            <iframe width="808" height="460" id="player-ytbe" src="https://www.youtube.com/embed/JeljHhQShuE?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="808" height="460" id="player-ytbe" src="https://www.youtube.com/embed/JeljHhQShuE&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <h6 style="color:#353535; margin-top: auto;">(the youtube link is a rickroll.)</h6>
        </div>
     </body>
