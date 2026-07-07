@@ -160,7 +160,8 @@
                     function onserch(url) {
                         if (url.includes("?v=")) {
                             vidId = url.substring(url.indexOf("?v=") + "?v=".length); 
-                        } else {
+                        }; 
+                        if (url.includes("?v=") == "False") {
                             let vidId = url;
                         };
                         document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${vidId}?&autoplay=1`;
