@@ -137,11 +137,6 @@
                 observer.observe(sentinel);
                 //runchat(500);
             };
-            const searchStr = "?v=";
-            function onsearch(url) {
-                let videoId = url.substring(url.indexOf("?v=") + "?v=".length);
-                document.getElementById("player-ytbe").src =  `https://www.youtube.com/embed/${videoId}`;
-            };
         </script>
     </head>
     <body onload="morelode()">
@@ -153,8 +148,16 @@
         </div>
        <div id="main" class="main">
             <section id="ctrl">
-                <input type="text" placeholder="enter youtube link (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or just dQw4w9WgXcQ">
-                <button onclick="runchat()">start video</button>
+                <script>
+                    const searchStr = "?v=";
+                    function onserch(url) {
+                        let videoId = url.substring(url.indexOf("?v=") + "?v=".length); 
+                        document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${videoId}`;
+                        document.getElementById('player-ytbe').contentWindow.location.reload();
+                    };
+                </script>
+                <input type="text" id="linky" placeholder="enter youtube link (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or just dQw4w9WgXcQ">
+                <button onclick="onserch(document.getElementById('linky').value);">start video</button>
             </section>
             <br>
             <iframe width="808" height="460" id="player-ytbe" src="https://www.youtube.com/embed/JeljHhQShuE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
