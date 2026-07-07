@@ -133,7 +133,7 @@
             function morelode() {
                 const container = document.getElementById('chat');
                 const sentinel = document.getElementById('sentinel');
-                const options = { root: container, rootMargin: '5px', threshold: 0.1};
+                const options = { root: container, rootMargin: '15px', threshold: 0.1};
                 const observerCallback = (entries, observer) => { entries.forEach( entry => { if (entry.isIntersecting) { runchat(5000); } } ); };
                 const observer = new IntersectionObserver(observerCallback, options);
                 observer.observe(sentinel);
@@ -156,13 +156,10 @@
        <div id="main" class="main">
             <section id="ctrl">
                 <script>
-                    let vidId
                     function onserch(url) {
+                        let vidId = url;
                         if (url.includes("?v=")) {
                             vidId = url.substring(url.indexOf("?v=") + "?v=".length); 
-                        }; 
-                        if (url.includes("?v=") == "False") {
-                            let vidId = url;
                         };
                         document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${vidId}?&autoplay=1`;
                         document.getElementById('player-ytbe').contentWindow.location.reload();
