@@ -125,7 +125,7 @@
                 for (let i = l; i < o+num; i++) {
                     await sleep(randm()*10)
                     let container = document.getElementById('chat');
-                    container.scrollTop = container.scrollHeight;
+                    container.scrollTop = container.scrollHeight-5;
                     chatmsg(i+1);
                     l = i+1;
                 };
