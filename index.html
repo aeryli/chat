@@ -122,7 +122,7 @@
             let l = 0;
             let o = l;
             async function runchat(num) {
-                for (let i = l; i < o+num; i++) {
+                while (true) {
                     await sleep(randm()*10)
                     let container = document.getElementById('chat');
                     container.scrollTop = container.scrollHeight-5;
@@ -137,7 +137,7 @@
                 const options = { root: container, rootMargin: '15px', threshold: 0.1};
                 const observerCallback = (entries, observer) => { entries.forEach( entry => { if (entry.isIntersecting) { runchat(5000); } } ); };
                 const observer = new IntersectionObserver(observerCallback, options);
-                observer.observe(sentinel);
+                //observer.observe(sentinel);
                 const currentUrl = window.location.href;
                 const urlObject = new URL(currentUrl);
                 if (urlObject.searchParams.get('v')) {
