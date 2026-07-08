@@ -140,10 +140,11 @@
                 //observer.observe(sentinel);
                 const currentUrl = window.location.href;
                 const urlObject = new URL(currentUrl);
+                runchat();
                 if (urlObject.searchParams.get('v')) {
                     onserch(urlObject.searchParams.get('v'));
                 };
-                runchat();
+                
             };
         </script>
     </head>
