@@ -152,6 +152,17 @@
 
                 console.log(temp.innerText);
             };
+            function historymsg(i, videoId) {
+                let chatdiv = document.getElementById("innerHistory");
+                let histItem = document.createElement("img");
+
+                histItem.id = `h${i}`;
+                histItem.className = 'ytclik'
+                histItem.setAttribute("onclick", `onserch('${videoId}');`);
+                histItem.src = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+                chatdiv.append(histItem);
+            };
+            
             let l = 0;
             let o = l;
             async function runchat() {
@@ -181,8 +192,16 @@
                 if (urlObject.searchParams.get('v')) {
                     onserch(urlObject.searchParams.get('v'));
                 };
+                if (urlObject.searchParams.get('l')) {
+                    let dogg = 0
+                    for (let x of JSON.parse(urlObject.searchParams.get('l').replace(/'/g, '"'))) {
+                        dogg += 1;
+                        historymsg(dogg, x)
+                    };
+                };
                 document.getElementById('player-ytbe').contentWindow.location.reload();
             };
+
             function setCookie(cname, cvalue, exdays) {
                 let d = new Date();
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -231,15 +250,7 @@
             <div style="height: 3vh;"></div><h6 style="color:#353535; margin-top: auto;">(the youtube link is a rickroll.)</h6>
             <div id="history" class="history">
                 <div class="arrowcontain"><img src="arrow.png" width="25vw" height="auto" class="arrow"></div><br>
-                <div class="innerHistory">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                <div class="innerHistory" id="innerHistory">
                 </div>
             </div>
             
