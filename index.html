@@ -115,6 +115,7 @@
             }
             #ctrl {
                 height: 4vh
+                
             }
         </style>
         <script>
@@ -195,6 +196,9 @@
                         dogg += 1;
                         historymsg(dogg, x)
                     };
+                } else {
+                    let chatdiv = document.getElementById("history");
+                    chatdiv.style.display = "none";
                 };
                 if (urlObject.searchParams.get('v')) {
                     onserch(urlObject.searchParams.get('v'));
