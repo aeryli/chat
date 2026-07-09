@@ -43,6 +43,39 @@
             .main::-webkit-scrollbar {
                 display: none;
             }
+            .history {
+                height: 45vh;
+                width:  60.75vw;
+                margin: auto; /* Pushes the entire div to the right side */
+                background-color: #555555;
+                padding: 15px;
+                overflow: hidden;
+                overflow-x: auto;
+                gap: 15px;
+            }
+            .history::-webkit-scrollbar {
+                display: none;
+            }
+            .arrow {
+                align-self: center;
+            }
+            .ytclik {
+                height: 20vw;
+                width: auto;
+            }
+            .arrowcontain {
+                display: flex;
+                flex-direction: column;
+            }
+            .innerHistory {
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                overflow-y: auto;
+            }
+            .innerHistory::-webkit-scrollbar {
+                display: none;
+            }
             section {
                 display: flex;         /* Puts items on the same line */
                 flex-direction: row;   /* Confirms horizontal direction (default) */
@@ -122,11 +155,13 @@
             let l = 0;
             let o = l;
             async function runchat() {
+                let container = document.getElementById('chat');
                 let i = 0;
                 while (true) {
-                    await sleep(randm()*10)
-                    let container = document.getElementById('chat');
-                    container.scrollTop = container.scrollHeight-5;
+                    await sleep(randm()*10);
+                    if ((container.scrollTop - (container.scrollHeight-5)) < 5) {
+                        container.scrollTop = container.scrollHeight-5;
+                    };
                     chatmsg(i+1);
                     l = i+1;
                     i++;
@@ -146,6 +181,35 @@
                 if (urlObject.searchParams.get('v')) {
                     onserch(urlObject.searchParams.get('v'));
                 };
+                document.getElementById('player-ytbe').contentWindow.location.reload();
+            };
+            function setCookie(cname, cvalue, exdays) {
+                let d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                let expires = "expires="+ d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            function getCookie(cname) {
+                let name = cname + "=";
+                let ca = decodeURIComponent(document.cookie).split(';');
+                for(let i = 0; i <ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') { c = c.substring(1); };
+                    if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }; 
+                };
+                return "";
+            }
+            let curserch = '';
+            function onserch(url) {
+                let vidId = url;
+                if (url.includes("?v=")) {
+                    vidId = url.substring(url.indexOf("?v=") + "?v=".length); 
+                };
+                if (curserch != vidId) {
+                    curserch = vidId;
+                    document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${vidId}?enablejsapi=1&autoplay=1`;
+                    document.getElementById('player-ytbe').contentWindow.location.reload();
+                };
             };
         </script>
     </head>
@@ -158,22 +222,27 @@
         </div>
        <div id="main" class="main">
             <section id="ctrl">
-                <script>
-                    function onserch(url) {
-                        let vidId = url;
-                        if (url.includes("?v=")) {
-                            vidId = url.substring(url.indexOf("?v=") + "?v=".length); 
-                        };
-                        document.getElementById("player-ytbe").src = `https://www.youtube.com/embed/${vidId}?enablejsapi=1&autoplay=1`;
-                        document.getElementById('player-ytbe').contentWindow.location.reload();
-                    };
-                </script>
                 <input type="text" id="linky" placeholder="enter youtube link (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or just dQw4w9WgXcQ">
                 <button onclick="onserch(document.getElementById('linky').value);">start video</button>
             </section>
             <br>
+            <!-- Test link: ?v=dQw4w9WgXcQ -->
             <iframe width="808" height="460" id="player-ytbe" src="https://www.youtube.com/embed/JeljHhQShuE?enablejsapi=1&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <h6 style="color:#353535; margin-top: auto;">(the youtube link is a rickroll.)</h6>
+            <div style="height: 3vh;"></div><h6 style="color:#353535; margin-top: auto;">(the youtube link is a rickroll.)</h6>
+            <div id="history" class="history">
+                <div class="arrowcontain"><img src="arrow.png" width="25vw" height="auto" class="arrow"></div><br>
+                <div class="innerHistory">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" onclick="onserch('dQw4w9WgXcQ');" class="ytclik">
+                </div>
+            </div>
+            
        </div>
     </body>
 </html>
