@@ -189,15 +189,15 @@
                 const currentUrl = window.location.href;
                 runchat();
                 const urlObject = new URL(currentUrl);
-                if (urlObject.searchParams.get('v')) {
-                    onserch(urlObject.searchParams.get('v'));
-                };
                 if (urlObject.searchParams.get('l')) {
                     let dogg = 0
                     for (let x of JSON.parse(urlObject.searchParams.get('l').replace(/'/g, '"'))) {
                         dogg += 1;
                         historymsg(dogg, x)
                     };
+                };
+                if (urlObject.searchParams.get('v')) {
+                    onserch(urlObject.searchParams.get('v'));
                 };
                 document.getElementById('player-ytbe').contentWindow.location.reload();
             };
